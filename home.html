@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Point Check Pro | MyndVerse</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --secondary: #10b981;
+    --secondary-dark: #0d9668;
+    --dark: #0f111a;
+    --darker: #0a0c14;
+    --light: #f8fafc;
+    --gray: #94a3b8;
+    --gray-dark: #475569;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --radius: 10px;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, var(--darker) 0%, #1e1b4b 100%);
+    color: var(--light);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.logo-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+.logo-text h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 5px;
+}
+
+.logo-text .tagline {
+    font-size: 0.9rem;
+    color: var(--gray);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--gray);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Painel de entrada */
+.input-panel {
+    background: rgba(15, 17, 26, 0.7);
+    border-radius: var(--radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.input-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-wrapper label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-wrapper label i {
+    color: var(--primary);
+}
+
+.input-wrapper input {
+    padding: 14px 18px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--light);
+    font-size: 16px;
+    transition: var(--transition);
+}
+
+.input-wrapper input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+
+/* Templates */
+.templates-panel {
+    background: rgba(15, 17, 26, 0.7);
+    border-radius: var(--radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.templates-panel h2 {
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.templates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.template-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 25px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.template-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--primary);
+}
+
+.template-card.active {
+    border-color: var(--primary);
+    background: rgba(79, 70, 229, 0.1);
+}
+
+.template-icon {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: var(--primary);
+}
+
+.template-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.template-card p {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.template-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background: rgba(79, 70, 229, 0.2);
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Resultado */
+.result-panel {
+    background: rgba(15, 17, 26, 0.7);
+    border-radius: var(--radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.result-panel h2 {
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 250px;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--light);
+    font-size: 16px;
+    line-height: 1.6;
+    resize: vertical;
+    transition: var(--transition);
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+/* Ações */
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 16px 28px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: var(--transition);
+    flex: 1;
+    min-width: 200px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: var(--secondary);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--light);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.footer a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .logo-text h1 {
+        font-size: 2rem;
+    }
+    
+    .templates-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .btn {
+        min-width: 100%;
+    }
+    
+    .input-group {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 15px 25px;
+    border-radius: 8px;
+    background: var(--success);
+    color: white;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast.warning {
+    background: var(--warning);
+}
+
+.toast.error {
+    background: var(--danger);
+}
+
+/* Customização */
+.customization-panel {
+    background: rgba(15, 17, 26, 0.7);
+    border-radius: var(--radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.customization-panel h2 {
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.customization-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.custom-option {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.custom-option label {
+    font-weight: 600;
+    color: var(--gray);
+}
+
+.option-select, .option-input {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--light);
+    font-size: 16px;
+    transition: var(--transition);
+}
+
+.option-select:focus, .option-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* Toggle */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--primary);
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <div class="logo-text">
+                <h1>Point Check Pro</h1>
+                <div class="tagline">MYNDVERSE</div>
+            </div>
+        </div>
+        <p class="subtitle">Sistema avançado de geração de mensagens personalizadas para comunicação eficiente</p>
+    </header>
+
+    <!-- Painel de entrada -->
+    <section class="input-panel">
+        <div class="input-group">
+            <div class="input-wrapper">
+                <label for="atendente"><i class="fas fa-user-tie"></i> Nome do Atendente</label>
+                <input type="text" id="atendente" placeholder="Seu nome ou da empresa">
+            </div>
+            <div class="input-wrapper">
+                <label for="alvo"><i class="fas fa-users"></i> Nome do Cliente</label>
+                <input type="text" id="alvo" placeholder="Nome do cliente ou empresa">
+            </div>
+            <div class="input-wrapper">
+                <label for="empresa"><i class="fas fa-building"></i> Nome da Empresa</label>
+                <input type="text" id="empresa" placeholder="MyndVerse (padrão)">
+            </div>
+        </div>
+    </section>
+
+    <!-- Painel de customização -->
+    <section class="customization-panel">
+        <h2><i class="fas fa-sliders-h"></i> Personalização</h2>
+        <div class="customization-options">
+            <div class="custom-option">
+                <label for="tone">Tom da Mensagem</label>
+                <select id="tone" class="option-select">
+                    <option value="formal">Formal</option>
+                    <option value="informal" selected>Informal</option>
+                    <option value="empatico">Empático</option>
+                    <option value="diretivo">Direto</option>
+                </select>
+            </div>
+            <div class="custom-option">
+                <label for="time">Período do Dia</label>
+                <select id="time" class="option-select">
+                    <option value="manha">Bom dia</option>
+                    <option value="tarde" selected>Boa tarde</option>
+                    <option value="noite">Boa noite</option>
+                    <option value="indiferente">Olá</option>
+                </select>
+            </div>
+            <div class="custom-option">
+                <label for="includeEmoji">Incluir Emojis</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <label class="switch">
+                        <input type="checkbox" id="includeEmoji" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <span id="emojiStatus">Ativado</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates -->
+    <section class="templates-panel">
+        <h2><i class="fas fa-th-large"></i> Templates Disponíveis</h2>
+        <div class="templates-grid">
+            <div class="template-card active" onclick="selecionarTemplate('imobiliaria')">
+                <div class="template-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3>Imobiliária</h3>
+                <p>Mensagem para imobiliárias buscando sites e soluções digitais para gerar mais clientes e oportunidades de venda.</p>
+                <div class="template-tags">
+                    <span class="tag">Imóveis</span>
+                    <span class="tag">Vendas</span>
+                </div>
+            </div>
+            <div class="template-card" onclick="selecionarTemplate('politico')">
+                <div class="template-icon">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <h3>Político</h3>
+                <p>Comunicação para autoridades e gabinetes fortalecendo a imagem pública e comunicação com a população.</p>
+                <div class="template-tags">
+                    <span class="tag">Institucional</span>
+                    <span class="tag">Marketing</span>
+                </div>
+            </div>
+            <div class="template-card" onclick="selecionarTemplate('hotel')">
+                <div class="template-icon">
+                    <i class="fas fa-hotel"></i>
+                </div>
+                <h3>Hotel</h3>
+                <p>Soluções para hotéis aumentarem reservas diretas com sites profissionais e automação de atendimento.</p>
+                <div class="template-tags">
+                    <span class="tag">Turismo</span>
+                    <span class="tag">Reservas</span>
+                </div>
+            </div>
+            <div class="template-card" onclick="selecionarTemplate('restaurante')">
+                <div class="template-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Restaurante</h3>
+                <p>Para restaurantes venderem mais e se posicionarem melhor no mercado com soluções digitais.</p>
+                <div class="template-tags">
+                    <span class="tag">Alimentação</span>
+                    <span class="tag">Delivery</span>
+                </div>
+            </div>
+            <div class="template-card" onclick="selecionarTemplate('advocacia')">
+                <div class="template-icon">
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <h3>Advocacia</h3>
+                <p>Para escritórios de advocacia que desejam fortalecer sua presença digital e atrair mais clientes.</p>
+                <div class="template-tags">
+                    <span class="tag">Jurídico</span>
+                    <span class="tag">Consultoria</span>
+                </div>
+            </div>
+            <div class="template-card" onclick="selecionarTemplate('clinica')">
+                <div class="template-icon">
+                    <i class="fas fa-hospital-user"></i>
+                </div>
+                <h3>Clínica Médica</h3>
+                <p>Para clínicas e consultórios melhorarem o agendamento online e comunicação com pacientes.</p>
+                <div class="template-tags">
+                    <span class="tag">Saúde</span>
+                    <span class="tag">Agendamento</span>
+                </div>
+            </div>
+            <div class="template-card" onclick="selecionarTemplate('escola')">
+                <div class="template-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Escola/Cursos</h3>
+                <p>Para instituições de ensino que desejam melhorar sua comunicação digital e captação de alunos.</p>
+                <div class="template-tags">
+                    <span class="tag">Educação</span>
+                    <span class="tag">Matrículas</span>
+                </div>
+            </div>
+            <div class="template-card" onclick="selecionarTemplate('ecommerce')">
+                <div class="template-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3>E-commerce</h3>
+                <p>Para lojas virtuais que buscam aumentar conversões e melhorar a experiência de compra online.</p>
+                <div class="template-tags">
+                    <span class="tag">Vendas Online</span>
+                    <span class="tag">Conversão</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resultado -->
+    <section class="result-panel">
+        <h2><i class="fas fa-edit"></i> Mensagem Gerada</h2>
+        <textarea id="resultado" placeholder="Sua mensagem personalizada aparecerá aqui..."></textarea>
+        <div class="stats">
+            <div id="charCount">Caracteres: 0</div>
+            <div id="wordCount">Palavras: 0</div>
+            <div id="templateType">Template: Nenhum</div>
+        </div>
+    </section>
+
+    <!-- Ações -->
+    <section class="actions">
+        <button class="btn btn-primary" onclick="gerarMensagem()">
+            <i class="fas fa-sync-alt"></i> Gerar Mensagem
+        </button>
+        <button class="btn btn-secondary" onclick="copiar()">
+            <i class="far fa-copy"></i> Copiar Mensagem
+        </button>
+        <button class="btn btn-outline" onclick="limpar()">
+            <i class="fas fa-eraser"></i> Limpar Tudo
+        </button>
+        <button class="btn btn-outline" onclick="exportar()">
+            <i class="fas fa-download"></i> Exportar
+        </button>
+        <button class="btn btn-outline" onclick="gerarPersonalizado()">
+            <i class="fas fa-magic"></i> Gerar Personalizado
+        </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Point Check Pro &copy; 2023 - MyndVerse | Sistema de Geração de Mensagens Inteligentes</p>
+        <p>Desenvolvido para comunicação eficiente e personalizada</p>
+    </footer>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMessage">Mensagem copiada com sucesso!</span>
+</div>
+
+<script>
+// Variáveis globais
+let templateAtual = 'imobiliaria';
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', function() {
+    // Configurar eventos
+    document.getElementById('empresa').value = 'MyndVerse';
+    document.getElementById('includeEmoji').addEventListener('change', function() {
+        document.getElementById('emojiStatus').textContent = this.checked ? 'Ativado' : 'Desativado';
+    });
+    
+    document.getElementById('resultado').addEventListener('input', atualizarContadores);
+    
+    // Gerar primeira mensagem
+    gerarMensagem();
+});
+
+// Selecionar template
+function selecionarTemplate(tipo) {
+    templateAtual = tipo;
+    
+    // Atualizar cards
+    document.querySelectorAll('.template-card').forEach(card => {
+        card.classList.remove('active');
+    });
+    
+    // Ativar card selecionado
+    event.currentTarget.classList.add('active');
+    
+    // Atualizar interface
+    document.getElementById('templateType').textContent = `Template: ${getTemplateNome(tipo)}`;
+    
+    // Gerar mensagem
+    gerarMensagem();
+}
+
+// Obter nome do template
+function getTemplateNome(tipo) {
+    const nomes = {
+        'imobiliaria': 'Imobiliária',
+        'politico': 'Político',
+        'hotel': 'Hotel',
+        'restaurante': 'Restaurante',
+        'advocacia': 'Advocacia',
+        'clinica': 'Clínica Médica',
+        'escola': 'Escola/Cursos',
+        'ecommerce': 'E-commerce'
+    };
+    return nomes[tipo] || 'Personalizado';
+}
+
+// Gerar mensagem
+function gerarMensagem() {
+    let atendente = document.getElementById("atendente").value || "[Atendente]";
+    let alvo = document.getElementById("alvo").value || "[Cliente]";
+    let empresa = document.getElementById("empresa").value || "MyndVerse";
+    let tom = document.getElementById("tone").value;
+    let periodo = document.getElementById("time").value;
+    let incluirEmojis = document.getElementById("includeEmoji").checked;
+    
+    // Saudação baseada no período
+    let saudacao = "";
+    switch(periodo) {
+        case 'manha': saudacao = "Bom dia"; break;
+        case 'tarde': saudacao = "Boa tarde"; break;
+        case 'noite': saudacao = "Boa noite"; break;
+        default: saudacao = "Olá";
+    }
+    
+    // Emojis baseados no template
+    const emojis = {
+        'imobiliaria': ['🏠', '💼', '📈'],
+        'politico': ['🏛️', '🗳️', '📢'],
+        'hotel': ['🏨', '🛌', '🌴'],
+        'restaurante': ['🍽️', '👨‍🍳', '⭐'],
+        'advocacia': ['⚖️', '📜', '🔍'],
+        'clinica': ['🏥', '👨‍⚕️', '💊'],
+        'escola': ['🎓', '📚', '🏫'],
+        'ecommerce': ['🛒', '📦', '💰']
+    };
+    
+    // Mensagens base por template
+    let mensagens = {
+        imobiliaria: `${saudacao} ${alvo}, tudo bem? ${incluirEmojis ? emojis.imobiliaria[0] : ''}
+Meu nome é ${atendente}, falo pela ${empresa}.
+Trabalhamos com criação de sites e soluções digitais para imobiliárias que querem gerar mais clientes e oportunidades de venda.
+Gostaria de entender como vocês estão hoje no digital e se posso te apresentar algumas ideias. ${incluirEmojis ? emojis.imobiliaria[2] : ''}`,
+
+        politico: `${saudacao} ${alvo}. ${incluirEmojis ? emojis.politico[0] : ''}
+Meu nome é ${atendente}, sou da ${empresa}.
+Atuamos com criação de sites institucionais e soluções digitais para autoridades e gabinetes, fortalecendo a imagem pública e a comunicação com a população.
+Posso te mostrar uma proposta que eleva o nível da presença digital. ${incluirEmojis ? emojis.politico[2] : ''}`,
+
+        hotel: `${saudacao} ${alvo}, tudo bem? ${incluirEmojis ? emojis.hotel[0] : ''}
+Aqui é ${atendente}, da ${empresa}.
+Ajudamos hotéis a aumentarem reservas diretas com sites profissionais e automação de atendimento.
+Posso te mostrar como isso pode funcionar no seu negócio. ${incluirEmojis ? emojis.hotel[2] : ''}`,
+
+        restaurante: `${saudacao} ${alvo}. ${incluirEmojis ? emojis.restaurante[0] : ''}
+Meu nome é ${atendente}, da ${empresa}.
+Criamos sites e soluções digitais para restaurantes venderem mais e se posicionarem melhor no mercado.
+Posso te explicar rapidamente como podemos alavancar seu negócio. ${incluirEmojis ? emojis.restaurante[2] : ''}`,
+
+        advocacia: `${saudacao} ${alvo}. ${incluirEmojis ? emojis.advocacia[0] : ''}
+Meu nome é ${atendente}, da ${empresa}.
+Desenvolvemos soluções digitais para escritórios de advocacia fortalecerem sua presença online e atraírem mais clientes.
+Podemos conversar sobre como melhorar sua comunicação digital? ${incluirEmojis ? emojis.advocacia[2] : ''}`,
+
+        clinica: `${saudacao} ${alvo}, tudo bem? ${incluirEmojis ? emojis.clinica[0] : ''}
+Aqui é ${atendente}, da ${empresa}.
+Oferecemos soluções digitais para clínicas e consultórios melhorarem o agendamento online e a comunicação com pacientes.
+Tenho algumas ideias que podem otimizar seu atendimento. ${incluirEmojis ? emojis.clinica[2] : ''}`,
+
+        escola: `${saudacao} ${alvo}. ${incluirEmojis ? emojis.escola[0] : ''}
+Meu nome é ${atendente}, da ${empresa}.
+Criamos sites e sistemas para instituições de ensino melhorarem sua comunicação digital e captação de alunos.
+Posso te mostrar como podemos ajudar sua instituição. ${incluirEmojis ? emojis.escola[2] : ''}`,
+
+        ecommerce: `${saudacao} ${alvo}, tudo bem? ${incluirEmojis ? emojis.ecommerce[0] : ''}
+Aqui é ${atendente}, da ${empresa}.
+Desenvolvemos soluções para e-commerces aumentarem conversões e melhorarem a experiência de compra online.
+Podemos conversar sobre como alavancar suas vendas digitais? ${incluirEmojis ? emojis.ecommerce[2] : ''}`
+    };
+
+    let mensagem = mensagens[templateAtual] || mensagens.imobiliaria;
+    
+    // Ajustar tom da mensagem
+    mensagem = ajustarTom(mensagem, tom);
+    
+    document.getElementById("resultado").value = mensagem;
+    atualizarContadores();
+    mostrarToast(`Mensagem ${getTemplateNome(templateAtual)} gerada!`, 'success');
+}
+
+// Ajustar tom da mensagem
+function ajustarTom(mensagem, tom) {
+    switch(tom) {
+        case 'formal':
+            return mensagem
+                .replace(/tudo bem\?/gi, "como vai?")
+                .replace(/Aqui é/gi, "Meu nome é")
+                .replace(/pode\b/gi, "poderia")
+                .replace(/te\b/gi, "o(a) senhor(a)")
+                + "\n\nAtenciosamente,";
+        
+        case 'empatico':
+            return mensagem
+                .replace(/tudo bem\?/gi, "espero que esteja tudo bem!")
+                .replace(/Olá/gi, "Olá, como vai?")
+                .replace(/Bom dia/gi, "Bom dia, espero que tenha um ótimo dia!")
+                .replace(/Posso te mostrar/gi, "Gostaria de te mostrar")
+                + "\n\nFico à disposição para qualquer dúvida!";
+        
+        case 'diretivo':
+            return mensagem
+                .replace(/tudo bem\?/gi, "")
+                .replace(/Gostaria de entender/gi, "Preciso entender")
+                .replace(/Podemos conversar/gi, "Vamos conversar")
+                .replace(/Posso te mostrar/gi, "Vou te mostrar")
+                .replace(/\n\n/g, "\n");
+        
+        default:
+            return mensagem; // Informal (padrão)
+    }
+}
+
+// Gerar mensagem personalizada
+function gerarPersonalizado() {
+    let atendente = document.getElementById("atendente").value || "[Atendente]";
+    let alvo = document.getElementById("alvo").value || "[Cliente]";
+    let empresa = document.getElementById("empresa").value || "MyndVerse";
+    
+    const prompt = `Crie uma mensagem personalizada de prospecção para ${alvo} da empresa ${empresa} assinada por ${atendente}. A mensagem deve ser persuasiva, profissional e focada em soluções digitais.`;
+    
+    // Em uma versão real, aqui integraríamos com uma API de IA
+    // Por enquanto, vamos usar uma mensagem genérica
+    const mensagemPersonalizada = `Olá ${alvo},
+
+Meu nome é ${atendente}, da ${empresa}. Estou entrando em contato porque identificamos que seu negócio tem um grande potencial para crescimento através de soluções digitais personalizadas.
+
+Na ${empresa}, desenvolvemos estratégias digitais completas que incluem criação de sites otimizados, automação de marketing e sistemas de gestão de relacionamento com clientes.
+
+Gostaria de agendar uma breve conversa para entendermos melhor seus objetivos e apresentarmos ideias que possam alavancar seus resultados.
+
+Qual o melhor horário para falarmos esta semana?
+
+Atenciosamente,
+${atendente}
+${empresa}`;
+    
+    document.getElementById("resultado").value = mensagemPersonalizada;
+    document.getElementById('templateType').textContent = `Template: Personalizado`;
+    atualizarContadores();
+    mostrarToast('Mensagem personalizada gerada!', 'success');
+}
+
+// Atualizar contadores
+function atualizarContadores() {
+    let texto = document.getElementById("resultado").value;
+    let charCount = texto.length;
+    let wordCount = texto.trim() === '' ? 0 : texto.trim().split(/\s+/).length;
+    
+    document.getElementById("charCount").textContent = `Caracteres: ${charCount}`;
+    document.getElementById("wordCount").textContent = `Palavras: ${wordCount}`;
+}
+
+// Copiar mensagem
+function copiar() {
+    let texto = document.getElementById("resultado");
+    
+    if (texto.value.trim() === "") {
+        mostrarToast("Não há mensagem para copiar!", "warning");
+        return;
+    }
+    
+    texto.select();
+    texto.setSelectionRange(0, 99999); // Para dispositivos móveis
+    
+    try {
+        navigator.clipboard.writeText(texto.value).then(() => {
+            mostrarToast("Mensagem copiada com sucesso!", "success");
+        });
+    } catch (err) {
+        // Fallback para navegadores mais antigos
+        document.execCommand("copy");
+        mostrarToast("Mensagem copiada com sucesso!", "success");
+    }
+}
+
+// Limpar tudo
+function limpar() {
+    document.getElementById("atendente").value = "";
+    document.getElementById("alvo").value = "";
+    document.getElementById("resultado").value = "";
+    document.getElementById('templateType').textContent = `Template: Nenhum`;
+    atualizarContadores();
+    mostrarToast("Campos limpos com sucesso!", "success");
+}
+
+// Exportar mensagem
+function exportar() {
+    let texto = document.getElementById("resultado").value;
+    
+    if (texto.trim() === "") {
+        mostrarToast("Não há mensagem para exportar!", "warning");
+        return;
+    }
+    
+    const blob = new Blob([texto], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `mensagem_${templateAtual}_${new Date().toISOString().slice(0,10)}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    mostrarToast("Mensagem exportada com sucesso!", "success");
+}
+
+// Mostrar toast
+function mostrarToast(mensagem, tipo = "success") {
+    const toast = document.getElementById("toast");
+    const toastMessage = document.getElementById("toastMessage");
+    
+    toastMessage.textContent = mensagem;
+    toast.className = "toast";
+    toast.classList.add(tipo);
+    toast.classList.add("show");
+    
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
+</script>
+</body>
+</html>
