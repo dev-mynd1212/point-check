@@ -49,7 +49,7 @@ body {
 /* Container principal mobile-first */
 .container {
     max-width: 100%;
-    padding: 20px 16px;
+    padding: 16px;
     padding-bottom: calc(20px + env(safe-area-inset-bottom));
 }
 
@@ -57,7 +57,12 @@ body {
 .header {
     text-align: center;
     margin-bottom: 24px;
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding-top: env(safe-area-inset-top);
+    background: linear-gradient(135deg, var(--darker) 0%, #1E1B4B 100%);
+    padding-bottom: 16px;
 }
 
 .logo-mobile {
@@ -65,23 +70,23 @@ body {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .logo-icon {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
-    border-radius: 14px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     box-shadow: var(--shadow);
 }
 
 .logo-text h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     background: linear-gradient(90deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
@@ -91,14 +96,14 @@ body {
 }
 
 .logo-text .tagline {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--gray);
     letter-spacing: 1px;
     text-transform: uppercase;
 }
 
 .subtitle {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--gray);
     line-height: 1.4;
     max-width: 320px;
@@ -111,7 +116,7 @@ body {
     backdrop-filter: blur(10px);
     border-radius: var(--radius);
     padding: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     box-shadow: var(--shadow);
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -162,7 +167,7 @@ body {
 /* Quick actions para mobile */
 .quick-actions {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     margin-bottom: 20px;
     overflow-x: auto;
     padding-bottom: 8px;
@@ -174,13 +179,13 @@ body {
 }
 
 .quick-action-btn {
-    padding: 12px 18px;
+    padding: 12px 16px;
     border-radius: var(--radius-sm);
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--light);
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     white-space: nowrap;
     display: flex;
     align-items: center;
@@ -194,8 +199,8 @@ body {
     color: var(--primary-light);
 }
 
-/* Templates carrossel mobile */
-.templates-section {
+/* Lista de modelos (Accordion) */
+.models-section {
     margin-bottom: 24px;
 }
 
@@ -214,83 +219,179 @@ body {
     gap: 8px;
 }
 
-.templates-carousel {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    padding-bottom: 12px;
-    -webkit-overflow-scrolling: touch;
-}
-
-.templates-carousel::-webkit-scrollbar {
-    display: none;
-}
-
-.template-card-mobile {
-    min-width: 280px;
+.models-count {
+    font-size: 0.85rem;
+    color: var(--gray);
     background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius);
-    padding: 20px;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.models-accordion {
     display: flex;
     flex-direction: column;
+    gap: 8px;
+}
+
+.model-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
     transition: var(--transition);
-    border: 2px solid transparent;
-    flex-shrink: 0;
 }
 
-.template-card-mobile.active {
-    background: rgba(99, 102, 241, 0.15);
+.model-item.active {
     border-color: var(--primary);
-    transform: translateY(-2px);
+    background: rgba(99, 102, 241, 0.15);
 }
 
-.template-header {
+.model-header {
+    padding: 18px 16px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: var(--transition);
 }
 
-.template-icon {
-    width: 44px;
-    height: 44px;
+.model-header:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.model-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+}
+
+.model-icon {
+    width: 42px;
+    height: 42px;
     background: rgba(99, 102, 241, 0.2);
-    border-radius: 12px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: var(--primary-light);
+    flex-shrink: 0;
 }
 
-.template-info h3 {
+.model-info {
+    flex: 1;
+}
+
+.model-info h3 {
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 4px;
-}
-
-.template-info p {
-    font-size: 0.8rem;
-    color: var(--gray);
-}
-
-.template-tags {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.model-info p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.3;
+}
+
+.model-tags {
+    display: flex;
     gap: 6px;
-    margin-top: 12px;
+    margin-top: 6px;
 }
 
 .tag {
     background: rgba(255, 255, 255, 0.1);
     color: var(--gray-light);
-    padding: 4px 10px;
-    border-radius: 20px;
+    padding: 3px 8px;
+    border-radius: 12px;
     font-size: 0.7rem;
     font-weight: 500;
 }
 
-/* Resultado otimizado para mobile */
+.model-chevron {
+    color: var(--gray);
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.model-item.active .model-chevron {
+    transform: rotate(180deg);
+    color: var(--primary);
+}
+
+.model-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.model-content.open {
+    max-height: 300px;
+}
+
+.model-preview {
+    padding: 0 16px 16px 72px;
+}
+
+.model-preview p {
+    font-size: 0.9rem;
+    color: var(--gray-light);
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.model-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.btn-sm {
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    border: none;
+    font-weight: 500;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    flex: 1;
+    justify-content: center;
+}
+
+.btn-sm-primary {
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--primary-light);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.btn-sm-primary:active {
+    background: rgba(99, 102, 241, 0.3);
+    transform: translateY(1px);
+}
+
+.btn-sm-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--light);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-sm-secondary:active {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(1px);
+}
+
+/* Resultado */
 .result-section {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -331,9 +432,9 @@ body {
 
 textarea {
     width: 100%;
-    min-height: 200px;
-    max-height: 300px;
-    padding: 18px;
+    min-height: 180px;
+    max-height: 250px;
+    padding: 16px;
     border-radius: var(--radius-sm);
     border: 2px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.07);
@@ -352,82 +453,17 @@ textarea:focus {
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
-/* Floating Action Buttons para mobile */
-.fab-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.fab-main {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
-    cursor: pointer;
-    transition: var(--transition);
-    z-index: 101;
-}
-
-.fab-main:hover {
-    transform: scale(1.05);
-}
-
-.fab-options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 10px;
-    align-items: flex-end;
-}
-
-.fab-option {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--dark);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    color: var(--light);
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: var(--transition);
-    opacity: 0;
-    transform: translateY(10px);
-}
-
-.fab-option.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.fab-option:hover {
-    background: var(--primary);
-    transform: scale(1.05);
-}
-
 /* Bottom actions para mobile */
 .bottom-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 20px;
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--darker) 0%, #1E1B4B 100%);
+    padding: 16px 0;
+    margin-bottom: env(safe-area-inset-bottom);
 }
 
 .btn-mobile {
@@ -506,13 +542,117 @@ textarea:focus {
     border-left: 4px solid var(--danger);
 }
 
-/* Switches mobile */
+/* Menu de opções flutuante */
+.floating-options {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(20px);
+    z-index: 2000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow-y: auto;
+    padding-top: calc(20px + env(safe-area-inset-top));
+}
+
+.floating-options.show {
+    transform: translateY(0);
+}
+
+.floating-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.floating-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.close-floating {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--light);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.option-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.option-card label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: var(--gray-light);
+    font-size: 0.95rem;
+}
+
+.select-mobile {
+    width: 100%;
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--light);
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 20px;
+}
+
+/* Switches */
+.switch-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.switch-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.switch-label span:first-child {
+    font-weight: 600;
+    color: var(--gray-light);
+}
+
+.switch-label span:last-child {
+    font-size: 0.85rem;
+    color: var(--gray);
+}
+
 .switch-mobile {
     position: relative;
     display: inline-block;
-    width: 52px;
-    height: 28px;
-    margin-right: 12px;
+    width: 54px;
+    height: 30px;
 }
 
 .switch-mobile input {
@@ -537,8 +677,8 @@ textarea:focus {
     content: "";
     height: 22px;
     width: 22px;
-    left: 3px;
-    bottom: 3px;
+    left: 4px;
+    bottom: 4px;
     background-color: white;
     transition: .4s;
 }
@@ -559,87 +699,6 @@ input:checked + .slider-mobile:before {
     border-radius: 50%;
 }
 
-/* Menu de opções */
-.options-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(20px);
-    z-index: 1000;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    transform: translateY(100%);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    overflow-y: auto;
-}
-
-.options-menu.show {
-    transform: translateY(0);
-}
-
-.options-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding-top: env(safe-area-inset-top);
-}
-
-.options-header h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.close-options {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: var(--light);
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.option-item {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-sm);
-    padding: 20px;
-    margin-bottom: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.option-item label {
-    display: block;
-    margin-bottom: 12px;
-    font-weight: 600;
-    color: var(--gray-light);
-    font-size: 0.95rem;
-}
-
-.select-mobile {
-    width: 100%;
-    padding: 16px;
-    border-radius: var(--radius-sm);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.07);
-    color: var(--light);
-    font-size: 16px;
-    font-family: 'Inter', sans-serif;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    background-size: 20px;
-}
-
 /* Footer mobile */
 .footer-mobile {
     text-align: center;
@@ -651,33 +710,50 @@ input:checked + .slider-mobile:before {
     line-height: 1.4;
 }
 
-.footer-mobile a {
-    color: var(--primary-light);
-    text-decoration: none;
+/* Animação de seleção */
+@keyframes pulseSelect {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.98); }
+    100% { transform: scale(1); }
 }
 
-/* Gestos para mobile */
-@media (hover: hover) and (pointer: fine) {
-    .btn-mobile:hover, .fab-main:hover, .fab-option:hover, .quick-action-btn:hover {
-        transform: translateY(-2px);
-    }
+.model-item.selected {
+    animation: pulseSelect 0.3s ease;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.5);
 }
 
 /* Suporte para telas maiores */
 @media (min-width: 768px) {
     .container {
-        max-width: 600px;
+        max-width: 500px;
         margin: 0 auto;
-        padding: 30px 20px;
-    }
-    
-    .fab-container {
-        bottom: 30px;
-        right: 30px;
+        padding: 20px;
     }
     
     .bottom-actions {
         grid-template-columns: repeat(4, 1fr);
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -703,7 +779,7 @@ input:checked + .slider-mobile:before {
                 <div class="tagline">MYNDVERSE</div>
             </div>
         </div>
-        <p class="subtitle">Gerador rápido de mensagens para prospecção • Otimizado para mobile</p>
+        <p class="subtitle">Toque no modelo, veja a prévia e gere sua mensagem</p>
     </header>
 
     <!-- Inputs principais -->
@@ -711,7 +787,7 @@ input:checked + .slider-mobile:before {
         <div class="input-group">
             <div class="input-wrapper">
                 <label for="atendente"><i class="fas fa-user-circle"></i> Seu Nome</label>
-                <input type="text" id="atendente" placeholder="Como devo me identificar?">
+                <input type="text" id="atendente" placeholder="Como você se chama?">
             </div>
             <div class="input-wrapper">
                 <label for="alvo"><i class="fas fa-user-tag"></i> Nome do Cliente</label>
@@ -729,17 +805,29 @@ input:checked + .slider-mobile:before {
             <i class="fas fa-briefcase"></i> Formal
         </button>
         <button class="quick-action-btn" onclick="toggleEmojis()" id="emojiToggle">
-            <i class="fas fa-smile"></i> Com Emojis
+            <i class="fas fa-smile"></i> Emojis
         </button>
-        <button class="quick-action-btn" onclick="abrirOpcoes()">
-            <i class="fas fa-cog"></i> Mais
+        <button class="quick-action-btn" onclick="abrirConfiguracoes()">
+            <i class="fas fa-sliders-h"></i> Mais
         </button>
     </div>
 
-    <!-- Templates em carrossel -->
-    <section class="templates-section">
+    <!-- Lista de modelos (Accordion) -->
+    <section class="models-section">
         <div class="section-header">
-            <h2><i class="fas fa-th-large"></i> Modelos</h2>
+            <h2><i class="fas fa-list-alt"></i> Modelos</h2>
+            <div class="models-count" id="modelsCount">8 modelos</div>
+        </div>
+        
+        <div class="models-accordion" id="modelsAccordion">
+            <!-- Modelos serão gerados via JavaScript -->
+        </div>
+    </section>
+
+    <!-- Resultado -->
+    <section class="result-section">
+        <div class="result-header">
+            <h2><i class="fas fa-edit"></i> Mensagem Gerada</h2>
             <div class="result-stats">
                 <div class="stat" id="charCountMobile">
                     <i class="fas fa-font"></i> <span>0</span>
@@ -749,71 +837,36 @@ input:checked + .slider-mobile:before {
                 </div>
             </div>
         </div>
-        
-        <div class="templates-carousel" id="templatesCarousel">
-            <!-- Templates serão gerados via JavaScript -->
-        </div>
-    </section>
-
-    <!-- Resultado -->
-    <section class="result-section">
-        <div class="result-header">
-            <h2><i class="fas fa-edit"></i> Mensagem</h2>
-        </div>
-        <textarea id="resultado" placeholder="Toque em um modelo para gerar a mensagem..."></textarea>
+        <textarea id="resultado" placeholder="Selecione um modelo acima para gerar a mensagem..." readonly></textarea>
     </section>
 
     <!-- Ações principais -->
     <div class="bottom-actions">
-        <button class="btn-mobile btn-primary" onclick="gerarMensagem()">
+        <button class="btn-mobile btn-primary" onclick="gerarMensagem()" id="generateBtn">
             <i class="fas fa-sync-alt"></i> Gerar
         </button>
-        <button class="btn-mobile btn-secondary" onclick="copiar()">
+        <button class="btn-mobile btn-secondary" onclick="copiarMensagem()" id="copyBtn">
             <i class="far fa-copy"></i> Copiar
         </button>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer-mobile">
-        <p>Point Check Mobile • MyndVerse</p>
-        <p>Use no campo, na rua, onde precisar</p>
-    </footer>
-</div>
-
-<!-- FAB (Floating Action Button) -->
-<div class="fab-container">
-    <div class="fab-options" id="fabOptions">
-        <button class="fab-option" onclick="copiar()" title="Copiar">
-            <i class="far fa-copy"></i>
+        <button class="btn-mobile btn-secondary" onclick="compartilharMensagem()" id="shareBtn">
+            <i class="fas fa-share-alt"></i> Compartilhar
         </button>
-        <button class="fab-option" onclick="limpar()" title="Limpar">
-            <i class="fas fa-eraser"></i>
-        </button>
-        <button class="fab-option" onclick="compartilhar()" title="Compartilhar">
-            <i class="fas fa-share-alt"></i>
+        <button class="btn-mobile btn-secondary" onclick="limparCampos()" id="clearBtn">
+            <i class="fas fa-eraser"></i> Limpar
         </button>
     </div>
-    <button class="fab-main" onclick="toggleFabOptions()">
-        <i class="fas fa-plus" id="fabIcon"></i>
-    </button>
 </div>
 
-<!-- Toast mobile -->
-<div class="toast-mobile" id="toastMobile">
-    <i class="fas fa-check-circle"></i>
-    <span id="toastMessage">Mensagem copiada!</span>
-</div>
-
-<!-- Menu de opções -->
-<div class="options-menu" id="optionsMenu">
-    <div class="options-header">
-        <h2><i class="fas fa-sliders-h"></i> Configurações</h2>
-        <button class="close-options" onclick="fecharOpcoes()">
+<!-- Menu de configurações flutuante -->
+<div class="floating-options" id="floatingOptions">
+    <div class="floating-header">
+        <h2><i class="fas fa-cog"></i> Configurações</h2>
+        <button class="close-floating" onclick="fecharConfiguracoes()">
             <i class="fas fa-times"></i>
         </button>
     </div>
     
-    <div class="option-item">
+    <div class="option-card">
         <label for="tomSelect">Tom da Mensagem</label>
         <select id="tomSelect" class="select-mobile">
             <option value="informal">Informal (Recomendado)</option>
@@ -823,8 +876,8 @@ input:checked + .slider-mobile:before {
         </select>
     </div>
     
-    <div class="option-item">
-        <label for="periodoSelect">Saudação</label>
+    <div class="option-card">
+        <label for="periodoSelect">Saudação Inicial</label>
         <select id="periodoSelect" class="select-mobile">
             <option value="tarde">Boa tarde (Padrão)</option>
             <option value="manha">Bom dia</option>
@@ -833,38 +886,44 @@ input:checked + .slider-mobile:before {
         </select>
     </div>
     
-    <div class="option-item">
-        <label>
-            <span style="display: flex; align-items: center;">
-                <span style="margin-right: 12px;">Incluir Emojis</span>
-                <label class="switch-mobile">
-                    <input type="checkbox" id="emojiToggleOption" checked>
-                    <span class="slider-mobile round"></span>
-                </label>
-            </span>
-        </label>
-        <p style="font-size: 0.85rem; color: var(--gray); margin-top: 8px;">Adiciona emojis relevantes à mensagem</p>
+    <div class="option-card">
+        <div class="switch-container">
+            <div class="switch-label">
+                <span>Usar Emojis</span>
+                <span>Adiciona emojis relevantes à mensagem</span>
+            </div>
+            <label class="switch-mobile">
+                <input type="checkbox" id="emojiToggleOption" checked>
+                <span class="slider-mobile round"></span>
+            </label>
+        </div>
     </div>
     
-    <div class="option-item">
+    <div class="option-card">
         <label for="empresaInput">Nome da Empresa</label>
         <input type="text" id="empresaInput" class="select-mobile" placeholder="MyndVerse" value="MyndVerse">
     </div>
     
-    <button class="btn-mobile btn-primary" style="margin-top: 20px;" onclick="aplicarOpcoes()">
-        <i class="fas fa-check"></i> Aplicar Configurações
+    <button class="btn-mobile btn-primary" style="margin-top: 20px;" onclick="aplicarConfiguracoes()">
+        <i class="fas fa-check"></i> Aplicar e Fechar
     </button>
+</div>
+
+<!-- Toast mobile -->
+<div class="toast-mobile" id="toastMobile">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMessage">Mensagem copiada!</span>
 </div>
 
 <script>
 // Estado da aplicação
 const estado = {
-    templateAtual: 'imobiliaria',
+    templateAtual: null,
+    templateAberto: null,
     tom: 'informal',
     periodo: 'tarde',
     emojis: true,
-    empresa: 'MyndVerse',
-    fabAberto: false
+    empresa: 'MyndVerse'
 };
 
 // Templates disponíveis
@@ -873,32 +932,36 @@ const templates = [
         id: 'imobiliaria',
         nome: 'Imobiliária',
         icone: 'fas fa-home',
-        descricao: 'Para imobiliárias que querem mais clientes',
-        tags: ['Vendas', 'Imóveis'],
+        descricao: 'Para imobiliárias que querem vender mais imóveis',
+        tags: ['Imóveis', 'Vendas', 'Captação'],
+        preview: 'Mensagem personalizada para corretores e imobiliárias, focada em gerar leads qualificados.',
         emoji: '🏠'
     },
     {
         id: 'politico',
         nome: 'Político',
         icone: 'fas fa-landmark',
-        descricao: 'Para autoridades e gabinetes',
-        tags: ['Institucional', 'Marketing'],
+        descricao: 'Para autoridades e candidatos',
+        tags: ['Institucional', 'Marketing', 'Imagem'],
+        preview: 'Comunicação profissional para políticos, fortalecendo imagem pública e conexão com eleitores.',
         emoji: '🏛️'
     },
     {
         id: 'hotel',
         nome: 'Hotel',
         icone: 'fas fa-hotel',
-        descricao: 'Aumentar reservas diretas',
-        tags: ['Turismo', 'Reservas'],
+        descricao: 'Aumente reservas diretas',
+        tags: ['Turismo', 'Reservas', 'Hospedagem'],
+        preview: 'Soluções digitais para hotéis melhorarem ocupação e experiência do hóspede.',
         emoji: '🏨'
     },
     {
         id: 'restaurante',
         nome: 'Restaurante',
         icone: 'fas fa-utensils',
-        descricao: 'Vender mais no digital',
-        tags: ['Alimentação', 'Delivery'],
+        descricao: 'Venda mais no delivery',
+        tags: ['Alimentação', 'Delivery', 'Cardápio'],
+        preview: 'Mensagem para restaurantes aumentarem vendas online e fidelizar clientes.',
         emoji: '🍽️'
     },
     {
@@ -906,23 +969,26 @@ const templates = [
         nome: 'Advocacia',
         icone: 'fas fa-gavel',
         descricao: 'Escritórios de advocacia',
-        tags: ['Jurídico', 'Consultoria'],
+        tags: ['Jurídico', 'Consultoria', 'Clientes'],
+        preview: 'Comunicação profissional para advogados conquistarem mais casos.',
         emoji: '⚖️'
     },
     {
         id: 'clinica',
-        nome: 'Clínica',
+        nome: 'Clínica Médica',
         icone: 'fas fa-hospital-user',
         descricao: 'Clínicas e consultórios',
-        tags: ['Saúde', 'Agendamento'],
+        tags: ['Saúde', 'Agendamento', 'Pacientes'],
+        preview: 'Soluções para clínicas melhorarem atendimento e captação de pacientes.',
         emoji: '🏥'
     },
     {
         id: 'escola',
-        nome: 'Escola',
+        nome: 'Escola/Cursos',
         icone: 'fas fa-graduation-cap',
         descricao: 'Instituições de ensino',
-        tags: ['Educação', 'Matrículas'],
+        tags: ['Educação', 'Matrículas', 'Alunos'],
+        preview: 'Mensagem para escolas aumentarem matrículas e engajamento de alunos.',
         emoji: '🎓'
     },
     {
@@ -930,88 +996,181 @@ const templates = [
         nome: 'E-commerce',
         icone: 'fas fa-shopping-cart',
         descricao: 'Lojas virtuais',
-        tags: ['Vendas Online', 'Conversão'],
+        tags: ['Vendas Online', 'Conversão', 'Tráfego'],
+        preview: 'Estratégias para e-commerces venderem mais e reduzirem custos.',
         emoji: '🛒'
     }
 ];
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
-    // Configurar carrossel de templates
-    renderizarTemplates();
+    // Renderizar lista de modelos
+    renderizarModelos();
     
     // Configurar eventos
-    document.getElementById('resultado').addEventListener('input', atualizarContadores);
     document.getElementById('emojiToggleOption').addEventListener('change', function() {
         estado.emojis = this.checked;
         atualizarBotaoEmojis();
     });
     
-    // Carregar configurações salvas
-    carregarConfiguracoes();
+    document.getElementById('resultado').addEventListener('input', atualizarContadores);
     
     // Configurar inputs para gerar ao digitar
     ['atendente', 'alvo'].forEach(id => {
-        document.getElementById(id).addEventListener('input', function() {
+        const input = document.getElementById(id);
+        input.addEventListener('input', function() {
             if (estado.templateAtual) {
                 gerarMensagem();
             }
         });
+        
+        // Placeholder dinâmico
+        input.addEventListener('focus', function() {
+            if (this.value === '') {
+                this.setAttribute('data-placeholder', this.placeholder);
+                this.placeholder = '';
+            }
+        });
+        
+        input.addEventListener('blur', function() {
+            if (this.value === '' && this.getAttribute('data-placeholder')) {
+                this.placeholder = this.getAttribute('data-placeholder');
+            }
+        });
     });
     
-    // Gerar primeira mensagem
+    // Carregar configurações salvas
+    carregarConfiguracoes();
+    
+    // Selecionar primeiro modelo por padrão
     setTimeout(() => {
-        selecionarTemplate('imobiliaria');
-        gerarMensagem();
-    }, 300);
+        if (!estado.templateAtual) {
+            selecionarModelo('imobiliaria');
+        }
+    }, 500);
 });
 
-// Renderizar templates no carrossel
-function renderizarTemplates() {
-    const container = document.getElementById('templatesCarousel');
+// Renderizar modelos na lista accordion
+function renderizarModelos() {
+    const container = document.getElementById('modelsAccordion');
     container.innerHTML = '';
     
     templates.forEach(template => {
         const isActive = template.id === estado.templateAtual;
-        const card = document.createElement('div');
-        card.className = `template-card-mobile ${isActive ? 'active' : ''}`;
-        card.onclick = () => selecionarTemplate(template.id);
+        const isOpen = template.id === estado.templateAberto;
         
-        card.innerHTML = `
-            <div class="template-header">
-                <div class="template-icon">
-                    <i class="${template.icone}"></i>
+        const item = document.createElement('div');
+        item.className = `model-item ${isActive ? 'active' : ''}`;
+        item.dataset.id = template.id;
+        
+        item.innerHTML = `
+            <div class="model-header" onclick="toggleModelo('${template.id}')">
+                <div class="model-header-left">
+                    <div class="model-icon">
+                        <i class="${template.icone}"></i>
+                    </div>
+                    <div class="model-info">
+                        <h3>
+                            ${template.nome}
+                            ${estado.emojis ? `<span>${template.emoji}</span>` : ''}
+                        </h3>
+                        <p>${template.descricao}</p>
+                        <div class="model-tags">
+                            ${template.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
                 </div>
-                <div class="template-info">
-                    <h3>${template.nome}</h3>
-                    <p>${template.descricao}</p>
+                <div class="model-chevron">
+                    <i class="fas fa-chevron-down"></i>
                 </div>
             </div>
-            <div class="template-tags">
-                ${template.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            <div class="model-content ${isOpen ? 'open' : ''}">
+                <div class="model-preview">
+                    <p>${template.preview}</p>
+                    <div class="model-actions">
+                        <button class="btn-sm btn-sm-primary" onclick="selecionarModelo('${template.id}'); event.stopPropagation();">
+                            <i class="fas fa-check"></i> Usar este
+                        </button>
+                        <button class="btn-sm btn-sm-secondary" onclick="gerarMensagem(); event.stopPropagation();">
+                            <i class="fas fa-sync-alt"></i> Gerar agora
+                        </button>
+                    </div>
+                </div>
             </div>
         `;
         
-        container.appendChild(card);
+        container.appendChild(item);
     });
+    
+    // Atualizar contador
+    document.getElementById('modelsCount').textContent = `${templates.length} modelos`;
 }
 
-// Selecionar template
-function selecionarTemplate(templateId) {
-    estado.templateAtual = templateId;
-    renderizarTemplates();
-    
-    const template = templates.find(t => t.id === templateId);
-    document.getElementById('templateNameMobile').innerHTML = `<i class="fas fa-tag"></i> <span>${template.nome}</span>`;
-    
-    // Scroll para o template selecionado
-    const container = document.getElementById('templatesCarousel');
-    const activeCard = container.querySelector('.template-card-mobile.active');
-    if (activeCard) {
-        activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+// Toggle accordion do modelo
+function toggleModelo(modeloId) {
+    // Fechar todos primeiro
+    if (estado.templateAberto === modeloId) {
+        estado.templateAberto = null;
+    } else {
+        estado.templateAberto = modeloId;
     }
     
+    // Atualizar UI
+    document.querySelectorAll('.model-content').forEach(content => {
+        content.classList.remove('open');
+    });
+    
+    document.querySelectorAll('.model-chevron').forEach(chevron => {
+        chevron.style.transform = 'rotate(0deg)';
+        chevron.style.color = 'var(--gray)';
+    });
+    
+    // Abrir o selecionado
+    if (estado.templateAberto) {
+        const item = document.querySelector(`.model-item[data-id="${modeloId}"]`);
+        const content = item.querySelector('.model-content');
+        const chevron = item.querySelector('.model-chevron');
+        
+        content.classList.add('open');
+        chevron.style.transform = 'rotate(180deg)';
+        chevron.style.color = 'var(--primary)';
+        
+        // Scroll suave para o item
+        setTimeout(() => {
+            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
+    
+    renderizarModelos();
+}
+
+// Selecionar modelo (para uso)
+function selecionarModelo(modeloId) {
+    estado.templateAtual = modeloId;
+    
+    // Adicionar efeito visual de seleção
+    const item = document.querySelector(`.model-item[data-id="${modeloId}"]`);
+    item.classList.add('selected');
+    setTimeout(() => item.classList.remove('selected'), 300);
+    
+    // Fechar accordion se estiver aberto
+    if (estado.templateAberto === modeloId) {
+        estado.templateAberto = null;
+    }
+    
+    renderizarModelos();
+    
+    const template = templates.find(t => t.id === modeloId);
+    document.getElementById('templateNameMobile').innerHTML = `<i class="fas fa-tag"></i> <span>${template.nome}</span>`;
+    
+    // Habilitar botão de gerar
+    document.getElementById('generateBtn').disabled = false;
+    
+    // Gerar mensagem automaticamente
     gerarMensagem();
+    
+    // Mostrar feedback
+    mostrarToast(`${template.nome} selecionado!`, 'success');
 }
 
 // Selecionar tom
@@ -1024,33 +1183,51 @@ function selecionarTom(tom) {
     });
     event.target.classList.add('active');
     
-    gerarMensagem();
+    // Atualizar select no menu
+    document.getElementById('tomSelect').value = tom;
+    
+    // Regenerar mensagem se houver modelo selecionado
+    if (estado.templateAtual) {
+        gerarMensagem();
+    }
 }
 
 // Toggle emojis
 function toggleEmojis() {
     estado.emojis = !estado.emojis;
     atualizarBotaoEmojis();
-    gerarMensagem();
+    
+    // Atualizar toggle no menu
+    document.getElementById('emojiToggleOption').checked = estado.emojis;
+    
+    // Regenerar mensagem se houver modelo selecionado
+    if (estado.templateAtual) {
+        gerarMensagem();
+    }
 }
 
 function atualizarBotaoEmojis() {
     const btn = document.getElementById('emojiToggle');
-    const toggleOption = document.getElementById('emojiToggleOption');
     
     if (estado.emojis) {
-        btn.innerHTML = '<i class="fas fa-smile"></i> Com Emojis';
+        btn.innerHTML = '<i class="fas fa-smile"></i> Emojis';
         btn.classList.add('active');
-        toggleOption.checked = true;
     } else {
-        btn.innerHTML = '<i class="far fa-smile"></i> Sem Emojis';
+        btn.innerHTML = '<i class="far fa-smile"></i> Emojis';
         btn.classList.remove('active');
-        toggleOption.checked = false;
     }
+    
+    // Atualizar emojis nos modelos
+    renderizarModelos();
 }
 
 // Gerar mensagem
 function gerarMensagem() {
+    if (!estado.templateAtual) {
+        mostrarToast('Selecione um modelo primeiro!', 'warning');
+        return;
+    }
+    
     const atendente = document.getElementById('atendente').value.trim() || '[Seu Nome]';
     const alvo = document.getElementById('alvo').value.trim() || '[Cliente]';
     const empresa = estado.empresa;
@@ -1078,45 +1255,21 @@ function gerarMensagem() {
     
     // Base das mensagens
     const mensagensBase = {
-        imobiliaria: `${saudacao} ${alvo}, tudo bem? ${estado.emojis ? emojisTemplate.imobiliaria[0] : ''}
-Meu nome é ${atendente}, falo pela ${empresa}.
-Trabalhamos com sites e soluções digitais para imobiliárias gerarem mais clientes e oportunidades de venda.
-Posso te apresentar algumas ideias? ${estado.emojis ? emojisTemplate.imobiliaria[2] : ''}`,
+        imobiliaria: `${saudacao} ${alvo}, tudo bem? ${estado.emojis ? emojisTemplate.imobiliaria[0] : ''}\n\nMeu nome é ${atendente}, falo pela ${empresa}.\n\nTrabalhamos com sites e soluções digitais para imobiliárias gerarem mais clientes e oportunidades de venda.\n\nPosso te apresentar algumas ideias? ${estado.emojis ? emojisTemplate.imobiliaria[2] : ''}`,
 
-        politico: `${saudacao} ${alvo}. ${estado.emojis ? emojisTemplate.politico[0] : ''}
-${atendente} da ${empresa}.
-Criamos sites institucionais e soluções digitais para autoridades e gabinetes, fortalecendo a imagem pública.
-Posso te mostrar uma proposta? ${estado.emojis ? emojisTemplate.politico[2] : ''}`,
+        politico: `${saudacao} ${alvo}. ${estado.emojis ? emojisTemplate.politico[0] : ''}\n\n${atendente} da ${empresa}.\n\nCriamos sites institucionais e soluções digitais para autoridades e gabinetes, fortalecendo a imagem pública.\n\nPosso te mostrar uma proposta? ${estado.emojis ? emojisTemplate.politico[2] : ''}`,
 
-        hotel: `${saudacao} ${alvo}, tudo bem? ${estado.emojis ? emojisTemplate.hotel[0] : ''}
-Aqui é ${atendente}, da ${empresa}.
-Ajudamos hotéis a aumentarem reservas diretas com sites profissionais e automação.
-Posso te mostrar como funciona? ${estado.emojis ? emojisTemplate.hotel[2] : ''}`,
+        hotel: `${saudacao} ${alvo}, tudo bem? ${estado.emojis ? emojisTemplate.hotel[0] : ''}\n\nAqui é ${atendente}, da ${empresa}.\n\nAjudamos hotéis a aumentarem reservas diretas com sites profissionais e automação.\n\nPosso te mostrar como funciona? ${estado.emojis ? emojisTemplate.hotel[2] : ''}`,
 
-        restaurante: `${saudacao} ${alvo}. ${estado.emojis ? emojisTemplate.restaurante[0] : ''}
-${atendente} da ${empresa}.
-Criamos sites e soluções digitais para restaurantes venderem mais.
-Posso te explicar rapidamente? ${estado.emojis ? emojisTemplate.restaurante[2] : ''}`,
+        restaurante: `${saudacao} ${alvo}. ${estado.emojis ? emojisTemplate.restaurante[0] : ''}\n\n${atendente} da ${empresa}.\n\nCriamos sites e soluções digitais para restaurantes venderem mais.\n\nPosso te explicar rapidamente? ${estado.emojis ? emojisTemplate.restaurante[2] : ''}`,
 
-        advocacia: `${saudacao} ${alvo}. ${estado.emojis ? emojisTemplate.advocacia[0] : ''}
-${atendente} da ${empresa}.
-Soluções digitais para escritórios de advocacia fortalecerem sua presença online.
-Podemos conversar? ${estado.emojis ? emojisTemplate.advocacia[2] : ''}`,
+        advocacia: `${saudacao} ${alvo}. ${estado.emojis ? emojisTemplate.advocacia[0] : ''}\n\n${atendente} da ${empresa}.\n\nSoluções digitais para escritórios de advocacia fortalecerem sua presença online.\n\nPodemos conversar? ${estado.emojis ? emojisTemplate.advocacia[2] : ''}`,
 
-        clinica: `${saudacao} ${alvo}, tudo bem? ${estado.emojis ? emojisTemplate.clinica[0] : ''}
-Aqui é ${atendente}, da ${empresa}.
-Soluções digitais para clínicas melhorarem o agendamento online.
-Tenho ideias para otimizar seu atendimento. ${estado.emojis ? emojisTemplate.clinica[2] : ''}`,
+        clinica: `${saudacao} ${alvo}, tudo bem? ${estado.emojis ? emojisTemplate.clinica[0] : ''}\n\nAqui é ${atendente}, da ${empresa}.\n\nSoluções digitais para clínicas melhorarem o agendamento online.\n\nTenho ideias para otimizar seu atendimento. ${estado.emojis ? emojisTemplate.clinica[2] : ''}`,
 
-        escola: `${saudacao} ${alvo}. ${estado.emojis ? emojisTemplate.escola[0] : ''}
-${atendente} da ${empresa}.
-Sites e sistemas para instituições de ensino melhorarem comunicação e captação.
-Posso te mostrar como ajudar. ${estado.emojis ? emojisTemplate.escola[2] : ''}`,
+        escola: `${saudacao} ${alvo}. ${estado.emojis ? emojisTemplate.escola[0] : ''}\n\n${atendente} da ${empresa}.\n\nSites e sistemas para instituições de ensino melhorarem comunicação e captação.\n\nPosso te mostrar como ajudar. ${estado.emojis ? emojisTemplate.escola[2] : ''}`,
 
-        ecommerce: `${saudacao} ${alvo}, tudo bem? ${estado.emojis ? emojisTemplate.ecommerce[0] : ''}
-Aqui é ${atendente}, da ${empresa}.
-Soluções para e-commerces aumentarem conversões.
-Podemos conversar sobre suas vendas? ${estado.emojis ? emojisTemplate.ecommerce[2] : ''}`
+        ecommerce: `${saudacao} ${alvo}, tudo bem? ${estado.emojis ? emojisTemplate.ecommerce[0] : ''}\n\nAqui é ${atendente}, da ${empresa}.\n\nSoluções para e-commerces aumentarem conversões.\n\nPodemos conversar sobre suas vendas? ${estado.emojis ? emojisTemplate.ecommerce[2] : ''}`
     };
     
     let mensagem = mensagensBase[estado.templateAtual] || mensagensBase.imobiliaria;
@@ -1126,6 +1279,9 @@ Podemos conversar sobre suas vendas? ${estado.emojis ? emojisTemplate.ecommerce[
     
     document.getElementById('resultado').value = mensagem;
     atualizarContadores();
+    
+    // Habilitar botão de copiar
+    document.getElementById('copyBtn').disabled = false;
 }
 
 // Ajustar tom da mensagem
@@ -1170,11 +1326,11 @@ function atualizarContadores() {
 }
 
 // Copiar mensagem
-function copiar() {
+function copiarMensagem() {
     const texto = document.getElementById('resultado');
     
     if (!texto.value.trim()) {
-        mostrarToast('Digite algo primeiro!', 'warning');
+        mostrarToast('Nada para copiar!', 'warning');
         return;
     }
     
@@ -1183,27 +1339,17 @@ function copiar() {
     
     navigator.clipboard.writeText(texto.value).then(() => {
         mostrarToast('Mensagem copiada!', 'success');
-        fecharFabOptions();
+        vibrar();
     }).catch(err => {
         // Fallback
         document.execCommand('copy');
         mostrarToast('Mensagem copiada!', 'success');
-        fecharFabOptions();
+        vibrar();
     });
 }
 
-// Limpar campos
-function limpar() {
-    document.getElementById('atendente').value = '';
-    document.getElementById('alvo').value = '';
-    document.getElementById('resultado').value = '';
-    atualizarContadores();
-    mostrarToast('Campos limpos!', 'success');
-    fecharFabOptions();
-}
-
-// Compartilhar
-function compartilhar() {
+// Compartilhar mensagem
+function compartilharMensagem() {
     const texto = document.getElementById('resultado').value;
     
     if (!texto.trim()) {
@@ -1218,57 +1364,44 @@ function compartilhar() {
             url: window.location.href
         }).then(() => {
             mostrarToast('Compartilhado!', 'success');
-            fecharFabOptions();
+            vibrar();
         }).catch(err => {
-            mostrarToast('Compartilhamento cancelado', 'warning');
+            // Usuário cancelou ou erro
+            if (err.name !== 'AbortError') {
+                copiarMensagem(); // Fallback para copiar
+            }
         });
     } else {
-        // Fallback para copiar
-        copiar();
+        copiarMensagem(); // Fallback para copiar
     }
 }
 
-// FAB functions
-function toggleFabOptions() {
-    estado.fabAberto = !estado.fabAberto;
+// Limpar campos
+function limparCampos() {
+    document.getElementById('atendente').value = '';
+    document.getElementById('alvo').value = '';
+    document.getElementById('resultado').value = '';
     
-    const options = document.getElementById('fabOptions');
-    const icon = document.getElementById('fabIcon');
-    const fabOptions = options.querySelectorAll('.fab-option');
+    // Resetar para primeiro modelo
+    selecionarModelo('imobiliaria');
     
-    if (estado.fabAberto) {
-        icon.className = 'fas fa-times';
-        fabOptions.forEach((option, index) => {
-            setTimeout(() => {
-                option.classList.add('show');
-            }, index * 100);
-        });
-    } else {
-        icon.className = 'fas fa-plus';
-        fabOptions.forEach(option => {
-            option.classList.remove('show');
-        });
-    }
+    atualizarContadores();
+    mostrarToast('Campos limpos!', 'success');
+    vibrar();
 }
 
-function fecharFabOptions() {
-    if (estado.fabAberto) {
-        toggleFabOptions();
-    }
-}
-
-// Menu de opções
-function abrirOpcoes() {
-    document.getElementById('optionsMenu').classList.add('show');
+// Menu de configurações
+function abrirConfiguracoes() {
+    document.getElementById('floatingOptions').classList.add('show');
     document.body.style.overflow = 'hidden';
 }
 
-function fecharOpcoes() {
-    document.getElementById('optionsMenu').classList.remove('show');
+function fecharConfiguracoes() {
+    document.getElementById('floatingOptions').classList.remove('show');
     document.body.style.overflow = 'auto';
 }
 
-function aplicarOpcoes() {
+function aplicarConfiguracoes() {
     estado.tom = document.getElementById('tomSelect').value;
     estado.periodo = document.getElementById('periodoSelect').value;
     estado.emojis = document.getElementById('emojiToggleOption').checked;
@@ -1286,18 +1419,23 @@ function aplicarOpcoes() {
     
     atualizarBotaoEmojis();
     salvarConfiguracoes();
-    fecharOpcoes();
-    gerarMensagem();
+    fecharConfiguracoes();
+    
+    if (estado.templateAtual) {
+        gerarMensagem();
+    }
+    
     mostrarToast('Configurações aplicadas!', 'success');
+    vibrar();
 }
 
 // Salvar/carregar configurações
 function salvarConfiguracoes() {
-    localStorage.setItem('pointCheckConfig', JSON.stringify(estado));
+    localStorage.setItem('pointCheckMobileConfig', JSON.stringify(estado));
 }
 
 function carregarConfiguracoes() {
-    const salvo = localStorage.getItem('pointCheckConfig');
+    const salvo = localStorage.getItem('pointCheckMobileConfig');
     if (salvo) {
         const config = JSON.parse(salvo);
         Object.assign(estado, config);
@@ -1307,7 +1445,14 @@ function carregarConfiguracoes() {
         document.getElementById('periodoSelect').value = estado.periodo;
         document.getElementById('emojiToggleOption').checked = estado.emojis;
         document.getElementById('empresaInput').value = estado.empresa;
+        
+        // Atualizar botões rápidos
         atualizarBotaoEmojis();
+        
+        // Selecionar modelo salvo se existir
+        if (estado.templateAtual) {
+            selecionarModelo(estado.templateAtual);
+        }
     }
 }
 
@@ -1316,7 +1461,13 @@ function mostrarToast(mensagem, tipo = 'success') {
     const toast = document.getElementById('toastMobile');
     const toastMessage = document.getElementById('toastMessage');
     
-    toastMessage.textContent = mensagem;
+    // Ícone baseado no tipo
+    let icon = 'fas fa-check-circle';
+    if (tipo === 'warning') icon = 'fas fa-exclamation-triangle';
+    if (tipo === 'error') icon = 'fas fa-times-circle';
+    
+    toast.innerHTML = `<i class="${icon}"></i><span id="toastMessage">${mensagem}</span>`;
+    
     toast.className = 'toast-mobile';
     toast.classList.add(tipo);
     toast.classList.add('show');
@@ -1326,49 +1477,40 @@ function mostrarToast(mensagem, tipo = 'success') {
     }, 3000);
 }
 
-// Suporte a gestos (swipe nos templates)
-let touchStartX = 0;
-let touchEndX = 0;
-
-document.getElementById('templatesCarousel').addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-});
-
-document.getElementById('templatesCarousel').addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-});
-
-function handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = touchStartX - touchEndX;
-    
-    if (Math.abs(diff) > swipeThreshold) {
-        const currentIndex = templates.findIndex(t => t.id === estado.templateAtual);
-        let newIndex;
-        
-        if (diff > 0) {
-            // Swipe para esquerda (próximo)
-            newIndex = (currentIndex + 1) % templates.length;
-        } else {
-            // Swipe para direita (anterior)
-            newIndex = (currentIndex - 1 + templates.length) % templates.length;
-        }
-        
-        selecionarTemplate(templates[newIndex].id);
-    }
-}
-
-// Vibrar no toque (se suportado)
-function vibrarLeve() {
+// Vibração (se suportada)
+function vibrar() {
     if (navigator.vibrate) {
         navigator.vibrate(50);
     }
 }
 
-// Adicionar vibração a ações importantes
+// Adicionar vibração aos botões
 document.querySelectorAll('button').forEach(btn => {
-    btn.addEventListener('touchstart', vibrarLeve);
+    btn.addEventListener('click', function(e) {
+        // Não vibrar em toggles de accordion
+        if (!this.closest('.model-header')) {
+            vibrar();
+        }
+    });
+});
+
+// Suporte a swipe nos modelos (opcional)
+let touchStartY = 0;
+let touchEndY = 0;
+
+document.getElementById('modelsAccordion').addEventListener('touchstart', e => {
+    touchStartY = e.changedTouches[0].screenY;
+});
+
+document.getElementById('modelsAccordion').addEventListener('touchend', e => {
+    touchEndY = e.changedTouches[0].screenY;
+    const diff = touchStartY - touchEndY;
+    
+    // Swipe longo para baixo fecha todos
+    if (Math.abs(diff) > 100 && diff > 0) {
+        estado.templateAberto = null;
+        renderizarModelos();
+    }
 });
 </script>
 </body>
